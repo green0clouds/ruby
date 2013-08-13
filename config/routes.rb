@@ -1,4 +1,6 @@
 MyStore::Application.routes.draw do
+  resources :items
+    
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -6,7 +8,10 @@ MyStore::Application.routes.draw do
   # root 'welcome#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  #get 'items/index' => 'items#index'
+  #get 'items/create' => 'items#create'
+  #get	 '/items(/:id)(.:format)'	=> 'items#id'
+  #get  '/:action(/:id)(.:format)' => 'action#id'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
@@ -53,4 +58,6 @@ MyStore::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  #match ':controller(/:action(/:id))(.:format)'
+  #map.connect ':controller/:action/:id'
 end
