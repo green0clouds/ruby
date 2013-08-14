@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-    
+   
   def index
     @item = Item.all
     # render "items/index"
@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
   
   # /items/new GET
   def new
+     @item = Item.new
   end
   
   # /items/1/edit GET
@@ -21,13 +22,14 @@ class ItemsController < ApplicationController
   end
   
   #  /items POST
-    
-  def create
-    #p params
-    #item_params = params.require(:item).permit(:name, :description, :price, :real, :weight)
-    #@item = Item.create(item_params)
-    #render text: " Item ID #{@item.id}: #{@item.name} (#{!@item.new_record?})"
-    render text: "Item created"
+   def create
+     
+      @item = Item.create(user_params)
+      if @item.errors.empty?
+         redirect_to item_path(@item)
+      else
+         render "new" 
+      end
   end
     
   # /items/1 PUT
@@ -38,4 +40,12 @@ class ItemsController < ApplicationController
   def destroy
   end
   
+  private
+
+  def user_params
+     params.require(:item).permit(:name, :price, :description, :weight)
+  end
+   
+   
+   
   end
