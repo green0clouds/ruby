@@ -1,4 +1,27 @@
+<div class="page-header">
+  <h1>List of Items <small>ruby on rails application</small></h1>
+</div>
+<table class="table table-hover" style="width:815px; margin: 50px">
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Price</th>
+         <th>Description</th>
+         <th>Weight</th>
+         <th>Action</th>
+         <th>Vote</th>
+      </tr>
+   </thead>
+
 <% @item.each do |i| %>
-<p> <%= link_to i.name, item_path(i) %> </p>
+   <tr> 
+      <td> <%= i.id%> </td>
+      <td><%= link_to i.name, item_path(i) %> </td><td><%= i.price %></td><td> <%= i.description%></td><td> <%= i.weight%></td>
+      <td> <%= link_to "remove item", item_path(i), method: :delete, data: { confirm: "Are you sure?"} %></td>
+      <td> Rating: <%= i.votes_count %> <%= link_to "+", upvote_item_path(i)%></td>
+    </tr>   
 <% end %>
-  
+ 
+</table>
+   

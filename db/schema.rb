@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130813172051) do
+ActiveRecord::Schema.define(version: 20130820202843) do
+
+  create_table "carts", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carts_items", id: false, force: true do |t|
+    t.integer "cart_id"
+    t.integer "item_id"
+  end
 
   create_table "items", force: true do |t|
     t.float    "price"
@@ -21,9 +32,26 @@ ActiveRecord::Schema.define(version: 20130813172051) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "votes_count", default: 0
   end
 
   add_index "items", ["name"], name: "index_items_on_name"
   add_index "items", ["price"], name: "index_items_on_price"
+
+  create_table "orders", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "login"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password"
+    t.string   "encripted_password"
+    t.string   "remember_me"
+    t.string   "email"
+  end
 
 end
